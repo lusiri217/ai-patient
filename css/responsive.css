@@ -1,0 +1,89 @@
+/* ============================================================
+   responsive.css — 响应式适配
+   手机（≤768px，含 375px）、平板、桌面
+   原则：不横向滚动、不错乱、聊天输入框固定
+   ============================================================ */
+
+/* ---------- 平板 / 小桌面 ---------- */
+@media (max-width: 1024px) {
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .split-layout { grid-template-columns: 300px 1fr; }
+}
+
+/* ---------- 手机 ---------- */
+@media (max-width: 768px) {
+  :root {
+    --space-5: 16px;
+    --space-6: 20px;
+    --space-7: 28px;
+  }
+  body { font-size: 14px; }
+
+  /* 应用外壳：侧边栏改为抽屉式（默认隐藏） */
+  .app-sidebar {
+    position: fixed;
+    top: 0; left: 0;
+    transform: translateX(-100%);
+    transition: transform 0.22s ease;
+    box-shadow: var(--shadow-lg);
+  }
+  .app-shell.nav-open .app-sidebar { transform: translateX(0); }
+  .app-shell.nav-open::after {
+    content: ""; position: fixed; inset: 0; background: rgba(0,0,0,0.35); z-index: 25;
+  }
+  .menu-toggle { display: inline-flex; align-items: center; justify-content: center; }
+  .app-main { height: 100vh; }
+
+  .topbar { padding: 0 var(--space-4); }
+  .topbar .topbar-title { font-size: 15px; }
+  .content-scroll { padding: var(--space-4); }
+
+  /* 栅格全部单列 */
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  .portal-grid { grid-template-columns: 1fr; gap: var(--space-4); }
+
+  /* 入口页 */
+  .entry-hero { padding: var(--space-6) var(--space-4) var(--space-4); }
+  .entry-hero h1 { font-size: 23px; }
+
+  /* 拆分布局：侧栏折叠到上方 */
+  .split-layout { grid-template-columns: 1fr; height: auto; min-height: 0; }
+  .split-side { max-height: 260px; }
+  .split-main { height: 70vh; }
+
+  /* 聊天 */
+  .msg { max-width: 90%; }
+  .chat-body { padding: var(--space-3) var(--space-3); }
+  .chat-input-bar { padding: var(--space-2) var(--space-3); }
+
+  /* 表格横向滚动容器已自带 overflow-x */
+  .stat-card { padding: var(--space-3); }
+  .stat-card .stat-ico { width: 40px; height: 40px; font-size: 19px; }
+  .stat-card .stat-meta b { font-size: 20px; }
+
+  .modal { max-width: 100%; }
+  .field-row > .field { min-width: 100%; }
+
+  /* 关键线索弹卡在小屏贴底 */
+  .clue-pop { max-width: calc(100vw - 24px); left: 12px !important; right: auto !important; }
+}
+
+/* ---------- 超小屏 / iPhone SE (375px) ---------- */
+@media (max-width: 380px) {
+  .portal-card { padding: var(--space-4); }
+  .topbar { gap: var(--space-2); }
+  .btn { padding: 8px 12px; font-size: 13px; }
+  .msg-avatar { width: 32px; height: 32px; font-size: 15px; }
+}
+
+/* ---------- 桌面大屏：限制内容宽度 ---------- */
+@media (min-width: 1400px) {
+  .content-wrap { max-width: 1180px; }
+}
+
+/* 打印友好（记录导出样式预留） */
+@media print {
+  .app-sidebar, .topbar, .btn, .toast-stack { display: none !important; }
+  .app-main { height: auto; overflow: visible; }
+  .content-scroll { overflow: visible; }
+}

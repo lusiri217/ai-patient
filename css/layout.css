@@ -1,0 +1,327 @@
+/* ============================================================
+   layout.css — 应用骨架、侧边栏、顶栏、主内容区、栅格
+   ============================================================ */
+
+/* ---------- 统一应用外壳 ---------- */
+.app-shell {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* 侧边栏 */
+.app-sidebar {
+  width: var(--sidebar-width);
+  flex-shrink: 0;
+  background: var(--bg-sidebar);
+  color: var(--text-on-dark);
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  padding: var(--space-5) var(--space-3);
+  z-index: 30;
+}
+
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 0 var(--space-3) var(--space-5);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: var(--space-4);
+}
+.sidebar-brand .logo {
+  width: 38px;
+  height: 38px;
+  border-radius: 11px;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+  display: grid;
+  place-items: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+.sidebar-brand .brand-text b {
+  display: block;
+  color: #fff;
+  font-size: 15px;
+}
+.sidebar-brand .brand-text span {
+  font-size: 12px;
+  color: var(--text-on-dark-muted);
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  overflow-y: auto;
+}
+.sidebar-nav .nav-group-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-on-dark-muted);
+  padding: var(--space-4) var(--space-3) var(--space-2);
+}
+.sidebar-nav a {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 10px var(--space-3);
+  border-radius: var(--radius-md);
+  color: var(--text-on-dark);
+  font-size: 14px;
+  transition: background 0.15s, color 0.15s;
+}
+.sidebar-nav a:hover {
+  background: var(--bg-sidebar-hover);
+  text-decoration: none;
+}
+.sidebar-nav a.active {
+  background: var(--color-primary);
+  color: #fff;
+  font-weight: 600;
+}
+.sidebar-nav a .nav-ico {
+  width: 20px;
+  text-align: center;
+  font-size: 16px;
+}
+.sidebar-footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: var(--space-4);
+  font-size: 12px;
+  color: var(--text-on-dark-muted);
+}
+.sidebar-footer a {
+  color: var(--text-on-dark-muted);
+}
+
+/* 主区域 */
+.app-main {
+  flex: 1;
+  min-width: 0; /* 防止子元素撑破 flex 导致横向滚动 */
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.topbar {
+  height: var(--topbar-height);
+  flex-shrink: 0;
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--space-5);
+  gap: var(--space-4);
+}
+.topbar .topbar-title {
+  font-size: 17px;
+  font-weight: 650;
+  color: var(--text-strong);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+.topbar .topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.content-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-5);
+}
+.content-wrap {
+  max-width: var(--max-content);
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* 移动端菜单按钮（默认隐藏） */
+.menu-toggle {
+  display: none;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  border-radius: var(--radius-md);
+  font-size: 20px;
+  cursor: pointer;
+  color: var(--text-base);
+}
+
+/* ---------- 入口页（index.html）---------- */
+.entry-hero {
+  text-align: center;
+  padding: var(--space-7) var(--space-4) var(--space-6);
+}
+.entry-hero h1 {
+  font-size: 30px;
+  margin-bottom: var(--space-3);
+}
+.entry-hero p {
+  color: var(--text-muted);
+  max-width: 640px;
+  margin: 0 auto;
+}
+.portal-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-5);
+  max-width: 980px;
+  margin: 0 auto;
+  padding: var(--space-4) var(--space-4) var(--space-7);
+}
+.portal-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  text-align: center;
+  transition: transform 0.18s, box-shadow 0.18s, border-color 0.18s;
+  cursor: pointer;
+  text-decoration: none;
+  display: block;
+  color: inherit;
+}
+.portal-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--color-primary);
+  text-decoration: none;
+}
+.portal-card .portal-ico {
+  width: 64px;
+  height: 64px;
+  border-radius: 18px;
+  display: grid;
+  place-items: center;
+  font-size: 30px;
+  margin: 0 auto var(--space-4);
+  color: #fff;
+}
+.portal-card.student .portal-ico { background: linear-gradient(135deg,#2563eb,#60a5fa); }
+.portal-card.admin .portal-ico { background: linear-gradient(135deg,#7c3aed,#a78bfa); }
+.portal-card.hospital .portal-ico { background: linear-gradient(135deg,#0ea5a4,#34d399); }
+.portal-card h3 { margin-bottom: var(--space-2); }
+.portal-card p { color: var(--text-muted); font-size: 14px; margin: 0; }
+
+/* ---------- 通用栅格 ---------- */
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4);
+}
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4);
+}
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-4);
+}
+.section {
+  margin-bottom: var(--space-6);
+}
+.section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-4);
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+.section-head h2 {
+  font-size: 19px;
+}
+
+/* ---------- 聊天布局（学生/医院）---------- */
+.chat-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+}
+.chat-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-4) var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  background: linear-gradient(180deg, #f8fafc, #f1f5f9);
+}
+.chat-input-bar {
+  flex-shrink: 0;
+  background: var(--bg-card);
+  border-top: 1px solid var(--border);
+  padding: var(--space-3) var(--space-4);
+}
+.chat-input-row {
+  display: flex;
+  gap: var(--space-2);
+  align-items: flex-end;
+}
+.chat-input-row textarea {
+  flex: 1;
+  resize: none;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-lg);
+  padding: 10px 14px;
+  min-height: 44px;
+  max-height: 140px;
+  background: var(--bg-input);
+  outline: none;
+}
+.chat-input-row textarea:focus {
+  border-color: var(--color-primary);
+  background: #fff;
+}
+
+/* 左侧选择面板（学生诊断选病例 / 医院侧栏） */
+.split-layout {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: var(--space-4);
+  height: 100%;
+  min-height: 0;
+}
+.split-side {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+}
+.split-side-head {
+  padding: var(--space-4);
+  border-bottom: 1px solid var(--border);
+  font-weight: 600;
+}
+.split-side-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-3);
+}
+.split-main {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  min-height: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}

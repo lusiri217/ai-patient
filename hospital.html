@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>医院端 · 病例上传</title>
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+  <!-- pdf.js：用于前端提取 PDF 文本；若网络不可用，上传 PDF 会提示并降级 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="app-sidebar">
+      <div class="sidebar-brand">
+        <div class="logo">🏥</div>
+        <div class="brand-text"><b>医院端</b><span>病例数据上传</span></div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-group-label">功能</div>
+        <a href="#" data-view="upload" class="active"><span class="nav-ico">💬</span>上传病例</a>
+        <a href="#" data-view="library"><span class="nav-ico">🗂️</span>病例库</a>
+        <div class="nav-group-label">其它端口</div>
+        <a href="student-diagnosis.html"><span class="nav-ico">🧑‍⚕️</span>学生端</a>
+        <a href="admin-dashboard.html"><span class="nav-ico">🛠️</span>管理端</a>
+        <a href="index.html"><span class="nav-ico">🏠</span>返回首页</a>
+      </nav>
+      <div class="sidebar-footer">AI 结构化 + 去隐私化</div>
+    </aside>
+
+    <div class="app-main">
+      <header class="topbar">
+        <div class="flex gap-2" style="align-items:center;">
+          <button class="menu-toggle">☰</button>
+          <div class="topbar-title">🏥 医院端 · 病例上传（对话式）</div>
+        </div>
+        <div class="topbar-actions"><a class="btn btn-ghost btn-sm" href="index.html">首页</a></div>
+      </header>
+
+      <div class="content-scroll">
+        <div class="content-wrap">
+          <!-- 上传对话视图 -->
+          <div id="view-upload" style="height:calc(100vh - var(--topbar-height) - 48px);">
+            <div class="chat-layout card-flat" style="height:100%;">
+              <div class="chat-body" id="chatBody"></div>
+              <div class="chat-input-bar">
+                <div class="flex gap-2 wrap mb-3">
+                  <button class="btn btn-sm btn-ghost" id="btnPdf">📕 上传 PDF</button>
+                  <button class="btn btn-sm btn-ghost" id="btnImg">🖼️ 上传图片</button>
+                  <button class="btn btn-sm btn-ghost" id="btnText">📄 提交文本</button>
+                  <button class="btn btn-sm btn-accent" id="btnGenerate">🤖 转换为结构化病例</button>
+                </div>
+                <div class="chat-input-row">
+                  <textarea id="textInput" placeholder="在此粘贴 / 输入文本病例，或上传文件；完成后点击“转换为结构化病例”…"></textarea>
+                </div>
+                <input type="file" id="pdfInput" accept="application/pdf" style="display:none;" />
+                <input type="file" id="imgInput" accept="image/*" style="display:none;" />
+              </div>
+            </div>
+          </div>
+
+          <!-- 病例库视图 -->
+          <div id="view-library" style="display:none;">
+            <div class="section-head">
+              <h2>病例库</h2>
+              <div class="flex gap-2 wrap">
+                <select class="select" id="libTypeFilter" style="width:auto;">
+                  <option value="">全部类型</option>
+                </select>
+                <input class="input" id="libSearch" type="text" placeholder="搜索标题 / 诊断…" style="width:200px;" />
+              </div>
+            </div>
+            <p class="text-muted text-sm mb-4">支持查看、筛选、编辑、删除、启用 / 停用。</p>
+            <div id="libraryList"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/mock-ai.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/hospital.js"></script>
+  <script src="js/shell.js"></script>
+  <script>
+    (function () {
+      if (window.pdfjsLib) {
+        window.pdfjsLib.GlobalWorkerOptions.workerSrc =
+          "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+      }
+    })();
+  </script>
+</body>
+</html>

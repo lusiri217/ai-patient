@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI 模拟患者诊断教学平台</title>
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+  <main class="content-wrap" style="padding-top:48px;">
+    <div class="entry-hero">
+      <div style="font-size:56px;margin-bottom:8px;">🩺</div>
+      <h1>AI 模拟患者诊断教学平台</h1>
+      <p>面向医学本科教育的 AI 模拟患者问诊与诊断训练系统。请选择下方入口开始使用。</p>
+    </div>
+
+    <div class="portal-grid">
+      <a class="portal-card student" href="student-diagnosis.html">
+        <div class="portal-ico">🧑‍⚕️</div>
+        <h3>学生端</h3>
+        <p>模拟问诊 · 病例诊断 · 题库练习 · 积分成长</p>
+      </a>
+      <a class="portal-card admin" href="admin-dashboard.html">
+        <div class="portal-ico">🛠️</div>
+        <h3>管理端</h3>
+        <p>API 配置 · AI 设置 · 病例审核 · 数据统计</p>
+      </a>
+      <a class="portal-card hospital" href="hospital.html">
+        <div class="portal-ico">🏥</div>
+        <h3>医院端</h3>
+        <p>上传病历 · AI 结构化 · 去隐私化 · 入库</p>
+      </a>
+    </div>
+
+    <p style="text-align:center;color:var(--text-muted);font-size:13px;margin-top:24px;">
+      纯前端原型 · 数据保存在浏览器 localStorage · 可在管理端配置真实大模型 API
+    </p>
+  </main>
+</body>
+</html>

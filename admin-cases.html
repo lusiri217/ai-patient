@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>管理端 · 病例审核</title>
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="app-sidebar">
+      <div class="sidebar-brand">
+        <div class="logo">🩺</div>
+        <div class="brand-text"><b>教学管理平台</b><span>AI 模拟患者系统</span></div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-group-label">管理</div>
+        <a href="admin-dashboard.html" data-page="dashboard"><span class="nav-ico">📊</span>仪表盘</a>
+        <a href="admin-apikey.html" data-page="apikey"><span class="nav-ico">🔑</span>API Key</a>
+        <a href="admin-ai-settings.html" data-page="ai"><span class="nav-ico">⚙️</span>AI 设置</a>
+        <a href="admin-cases.html" data-page="cases"><span class="nav-ico">🗂️</span>病例审核</a>
+        <a href="admin-stats.html" data-page="stats"><span class="nav-ico">📈</span>统计</a>
+        <div class="nav-group-label">其它端口</div>
+        <a href="student-diagnosis.html"><span class="nav-ico">🧑‍⚕️</span>学生端</a>
+        <a href="hospital.html"><span class="nav-ico">🏥</span>医院端</a>
+        <a href="index.html"><span class="nav-ico">🏠</span>返回首页</a>
+      </nav>
+      <div class="sidebar-footer">数据存于浏览器 localStorage</div>
+    </aside>
+
+    <div class="app-main">
+      <header class="topbar">
+        <div class="flex gap-2" style="align-items:center;">
+          <button class="menu-toggle">☰</button>
+          <div class="topbar-title">🗂️ 管理端 · 病例审核 / 管理</div>
+        </div>
+        <div class="topbar-actions"><a class="btn btn-ghost btn-sm" href="index.html">首页</a></div>
+      </header>
+
+      <div class="content-scroll">
+        <div class="content-wrap">
+          <div class="section-head">
+            <h2>病例库</h2>
+            <select class="select" id="adminTypeFilter" style="width:auto;">
+              <option value="">全部类型</option>
+            </select>
+          </div>
+          <p class="text-muted text-sm mb-4">医院端上传的病例默认“待审核 / 停用”，需在此审核启用后学生端方可诊断。也可直接编辑或删除。</p>
+          <div id="adminCaseList"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/mock-ai.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/admin.js"></script>
+  <script src="js/shell.js"></script>
+  <script>
+    (function () {
+      const sel = document.getElementById("adminTypeFilter");
+      AIPS.CASE_TYPES.forEach((t) => sel.appendChild(new Option(t, t)));
+      AIPS.admin.initCases();
+    })();
+  </script>
+</body>
+</html>

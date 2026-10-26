@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>管理端 · API Key 管理</title>
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="app-sidebar">
+      <div class="sidebar-brand">
+        <div class="logo">🩺</div>
+        <div class="brand-text"><b>教学管理平台</b><span>AI 模拟患者系统</span></div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-group-label">管理</div>
+        <a href="admin-dashboard.html" data-page="dashboard"><span class="nav-ico">📊</span>仪表盘</a>
+        <a href="admin-apikey.html" data-page="apikey"><span class="nav-ico">🔑</span>API Key</a>
+        <a href="admin-ai-settings.html" data-page="ai"><span class="nav-ico">⚙️</span>AI 设置</a>
+        <a href="admin-cases.html" data-page="cases"><span class="nav-ico">🗂️</span>病例审核</a>
+        <a href="admin-stats.html" data-page="stats"><span class="nav-ico">📈</span>统计</a>
+        <div class="nav-group-label">其它端口</div>
+        <a href="student-diagnosis.html"><span class="nav-ico">🧑‍⚕️</span>学生端</a>
+        <a href="hospital.html"><span class="nav-ico">🏥</span>医院端</a>
+        <a href="index.html"><span class="nav-ico">🏠</span>返回首页</a>
+      </nav>
+      <div class="sidebar-footer">数据存于浏览器 localStorage</div>
+    </aside>
+
+    <div class="app-main">
+      <header class="topbar">
+        <div class="flex gap-2" style="align-items:center;">
+          <button class="menu-toggle">☰</button>
+          <div class="topbar-title">🔑 管理端 · API Key 管理</div>
+        </div>
+        <div class="topbar-actions"><a class="btn btn-ghost btn-sm" href="index.html">首页</a></div>
+      </header>
+
+      <div class="content-scroll">
+        <div class="content-wrap">
+          <div class="grid-2">
+            <div class="card">
+              <h2 style="font-size:18px;margin-bottom:4px;">写入 / 更新 API Key</h2>
+              <p class="text-muted text-sm mb-4">Key 仅保存在浏览器 localStorage，不会写入源码。更换新 Key 后立即生效。</p>
+
+              <div class="field">
+                <label>当前 Key 状态</label>
+                <div class="flex gap-2 flex-center" style="justify-content:flex-start;">
+                  <span id="maskedKey" class="mono text-sm">（未配置）</span>
+                  <span id="keyStatus" class="badge badge-warning badge-dot">未配置 Key</span>
+                </div>
+              </div>
+
+              <div class="field">
+                <label>API Key（留空则不修改已保存的 Key）</label>
+                <input class="input mono" type="password" id="apiKey" placeholder="sk-..." autocomplete="off" />
+                <div class="field-hint">支持任意 OpenAI 兼容接口（在 AI 设置中配置 Base URL 与模型）。</div>
+              </div>
+              <div class="field">
+                <label>Base URL</label>
+                <input class="input mono" type="text" id="baseURL" placeholder="https://api.openai.com/v1" />
+              </div>
+              <div class="field">
+                <label>模型名称</label>
+                <input class="input mono" type="text" id="model" placeholder="gpt-4o-mini" />
+              </div>
+
+              <div class="flex gap-2 wrap">
+                <button class="btn btn-primary" id="btnSaveKey">保存配置</button>
+                <button class="btn btn-danger" id="btnEraseKey">一键抹除 Key</button>
+              </div>
+            </div>
+
+            <div class="card">
+              <h2 style="font-size:18px;margin-bottom:4px;">调用总开关</h2>
+              <p class="text-muted text-sm mb-4">关闭后，学生端与医院端将不再发起真实请求，并提示“管理员已停止 API 调用”。</p>
+
+              <div class="setting-row">
+                <div class="setting-label">
+                  <b>允许发起 AI 调用</b>
+                  <span>关闭即停止全部真实 API 请求（演示模式可继续回退）</span>
+                </div>
+                <label class="switch">
+                  <input type="checkbox" id="apiEnabled" />
+                  <span class="slider"></span>
+                </label>
+              </div>
+
+              <div class="banner banner-warning mt-4">
+                ⚠️ 抹除 Key 与停止调用均需二次确认，避免误操作。
+              </div>
+
+              <div class="banner banner-info">
+                💡 提示：未配置 Key 或停止调用时，系统自动进入“演示模式（模拟患者）”，方便教学验收。
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/mock-ai.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/admin.js"></script>
+  <script src="js/shell.js"></script>
+  <script>AIPS.admin.initApiKey();</script>
+</body>
+</html>

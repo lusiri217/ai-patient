@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>管理端 · 统计</title>
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="app-sidebar">
+      <div class="sidebar-brand">
+        <div class="logo">🩺</div>
+        <div class="brand-text"><b>教学管理平台</b><span>AI 模拟患者系统</span></div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-group-label">管理</div>
+        <a href="admin-dashboard.html" data-page="dashboard"><span class="nav-ico">📊</span>仪表盘</a>
+        <a href="admin-apikey.html" data-page="apikey"><span class="nav-ico">🔑</span>API Key</a>
+        <a href="admin-ai-settings.html" data-page="ai"><span class="nav-ico">⚙️</span>AI 设置</a>
+        <a href="admin-cases.html" data-page="cases"><span class="nav-ico">🗂️</span>病例审核</a>
+        <a href="admin-stats.html" data-page="stats"><span class="nav-ico">📈</span>统计</a>
+        <div class="nav-group-label">其它端口</div>
+        <a href="student-diagnosis.html"><span class="nav-ico">🧑‍⚕️</span>学生端</a>
+        <a href="hospital.html"><span class="nav-ico">🏥</span>医院端</a>
+        <a href="index.html"><span class="nav-ico">🏠</span>返回首页</a>
+      </nav>
+      <div class="sidebar-footer">数据存于浏览器 localStorage</div>
+    </aside>
+
+    <div class="app-main">
+      <header class="topbar">
+        <div class="flex gap-2" style="align-items:center;">
+          <button class="menu-toggle">☰</button>
+          <div class="topbar-title">📈 管理端 · 统计</div>
+        </div>
+        <div class="topbar-actions"><a class="btn btn-ghost btn-sm" href="index.html">首页</a></div>
+      </header>
+
+      <div class="content-scroll">
+        <div class="content-wrap">
+          <div class="grid-4 mb-4">
+            <div class="stat-card"><div class="stat-ico" style="background:var(--color-warning-soft);color:#b45309;">🪙</div><div class="stat-meta"><b id="statTokenUsed">—</b><span>今日 Token 已用</span></div></div>
+            <div class="stat-card"><div class="stat-ico" style="background:#eef2f7;color:var(--text-muted);">📋</div><div class="stat-meta"><b id="statTokenLimit">—</b><span>每日 Token 上限</span></div></div>
+            <div class="stat-card"><div class="stat-ico" style="background:#eef2f7;color:var(--text-muted);">🧑‍⚕️</div><div class="stat-meta"><b id="statDiagCount">—</b><span>诊断次数</span></div></div>
+            <div class="stat-card"><div class="stat-ico" style="background:#eef2f7;color:var(--text-muted);">✏️</div><div class="stat-meta"><b id="statQuizCount">—</b><span>做题数</span></div></div>
+          </div>
+
+          <div class="grid-2">
+            <div class="card">
+              <h2 style="font-size:17px;margin-bottom:12px;">Token 用量</h2>
+              <div class="progress mb-3"><span id="tokenProgress" style="width:0%;"></span></div>
+              <p class="text-muted text-sm" id="tokenText">—</p>
+            </div>
+            <div class="card">
+              <h2 style="font-size:17px;margin-bottom:12px;">诊断与做题</h2>
+              <div class="score-grid">
+                <div class="score-item"><b id="statDiagAvg">—</b><span>平均诊断得分</span></div>
+                <div class="score-item"><b id="statQuizAcc">—</b><span>选择题正确率</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card mt-4">
+            <h2 style="font-size:17px;margin-bottom:12px;">积分汇总</h2>
+            <div class="flex gap-2 flex-center mb-3" style="justify-content:flex-start;">
+              <b style="font-size:22px;" id="statPointsTotal">—</b><span class="text-muted text-sm">学生总积分</span>
+            </div>
+            <div class="score-grid" id="pointsBreakdown"></div>
+          </div>
+
+          <div class="card mt-4">
+            <h2 style="font-size:17px;margin-bottom:12px;">最近诊断记录</h2>
+            <div class="table-wrap">
+              <table class="data">
+                <thead><tr><th>时间</th><th>病例</th><th>提交诊断</th><th>得分</th><th>人文关怀</th></tr></thead>
+                <tbody id="recentDiag"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/mock-ai.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/admin.js"></script>
+  <script src="js/shell.js"></script>
+  <script>AIPS.admin.initStats();</script>
+</body>
+</html>

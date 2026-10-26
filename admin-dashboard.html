@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>管理端 · 仪表盘</title>
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="app-sidebar">
+      <div class="sidebar-brand">
+        <div class="logo">🩺</div>
+        <div class="brand-text"><b>教学管理平台</b><span>AI 模拟患者系统</span></div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-group-label">管理</div>
+        <a href="admin-dashboard.html" data-page="dashboard"><span class="nav-ico">📊</span>仪表盘</a>
+        <a href="admin-apikey.html" data-page="apikey"><span class="nav-ico">🔑</span>API Key</a>
+        <a href="admin-ai-settings.html" data-page="ai"><span class="nav-ico">⚙️</span>AI 设置</a>
+        <a href="admin-cases.html" data-page="cases"><span class="nav-ico">🗂️</span>病例审核</a>
+        <a href="admin-stats.html" data-page="stats"><span class="nav-ico">📈</span>统计</a>
+        <div class="nav-group-label">其它端口</div>
+        <a href="student-diagnosis.html"><span class="nav-ico">🧑‍⚕️</span>学生端</a>
+        <a href="hospital.html"><span class="nav-ico">🏥</span>医院端</a>
+        <a href="index.html"><span class="nav-ico">🏠</span>返回首页</a>
+      </nav>
+      <div class="sidebar-footer">数据存于浏览器 localStorage</div>
+    </aside>
+
+    <div class="app-main">
+      <header class="topbar">
+        <div class="flex gap-2" style="align-items:center;">
+          <button class="menu-toggle">☰</button>
+          <div class="topbar-title">🛠️ 管理端 · 仪表盘</div>
+        </div>
+        <div class="topbar-actions"><a class="btn btn-ghost btn-sm" href="index.html">首页</a></div>
+      </header>
+
+      <div class="content-scroll">
+        <div class="content-wrap">
+          <div id="statusBanner" class="banner banner-info">加载中…</div>
+
+          <div class="grid-4 mb-4">
+            <div class="stat-card">
+              <div class="stat-ico" style="background:var(--color-primary-soft);color:var(--color-primary);">🔑</div>
+              <div class="stat-meta"><b id="statApiKey">—</b><span>API Key 状态</span></div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-ico" style="background:var(--color-success-soft);color:var(--color-success);">🟢</div>
+              <div class="stat-meta"><b id="statApiOn">—</b><span>调用开关</span></div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-ico" style="background:var(--color-warning-soft);color:#b45309;">🪙</div>
+              <div class="stat-meta"><b id="statToken">—</b><span>今日 Token 用量</span></div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-ico" style="background:var(--color-info-soft);color:var(--color-info);">📈</div>
+              <div class="stat-meta"><b id="statPoints">—</b><span>学生总积分</span></div>
+            </div>
+          </div>
+
+          <div class="grid-4">
+            <div class="stat-card">
+              <div class="stat-ico" style="background:#eef2f7;color:var(--text-muted);">🗂️</div>
+              <div class="stat-meta"><b id="statCases">—</b><span>病例总数</span></div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-ico" style="background:#eef2f7;color:var(--text-muted);">✅</div>
+              <div class="stat-meta"><b id="statEnabled">—</b><span>已启用病例</span></div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-ico" style="background:#eef2f7;color:var(--text-muted);">🧑‍⚕️</div>
+              <div class="stat-meta"><b id="statDiag">—</b><span>学生诊断次数</span></div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-ico" style="background:#eef2f7;color:var(--text-muted);">✏️</div>
+              <div class="stat-meta"><b id="statQuiz">—</b><span>题库题目数</span></div>
+            </div>
+          </div>
+
+          <div class="section mt-4">
+            <div class="section-head"><h2>快速入口</h2></div>
+            <div class="grid-3">
+              <a class="card card-flat card-hover" href="admin-apikey.html" style="display:block;text-decoration:none;">
+                <h3 style="font-size:15px;">🔑 API Key 管理</h3>
+                <p class="text-muted text-sm">写入 / 脱敏 / 抹除 Key，开启或停止 API 调用。</p>
+              </a>
+              <a class="card card-flat card-hover" href="admin-ai-settings.html" style="display:block;text-decoration:none;">
+                <h3 style="font-size:15px;">⚙️ AI 调用设置</h3>
+                <p class="text-muted text-sm">提示词、英文患者概率、Token 限制、积分规则。</p>
+              </a>
+              <a class="card card-flat card-hover" href="admin-cases.html" style="display:block;text-decoration:none;">
+                <h3 style="font-size:15px;">🗂️ 病例审核</h3>
+                <p class="text-muted text-sm">审核、启用 / 停用、编辑、删除医院端病例。</p>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/mock-ai.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/admin.js"></script>
+  <script src="js/shell.js"></script>
+  <script>AIPS.admin.initDashboard();</script>
+</body>
+</html>

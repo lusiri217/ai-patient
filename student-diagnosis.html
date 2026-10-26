@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>学生端 · 诊断练习</title>
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="app-sidebar">
+      <div class="sidebar-brand">
+        <div class="logo">🧑‍⚕️</div>
+        <div class="brand-text"><b>学生端</b><span>诊断训练</span></div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-group-label">学习</div>
+        <a href="student-diagnosis.html"><span class="nav-ico">💬</span>诊断练习</a>
+        <a href="student-records.html"><span class="nav-ico">📋</span>问诊记录</a>
+        <a href="student-quiz.html"><span class="nav-ico">✏️</span>题库练习</a>
+        <div class="nav-group-label">其它端口</div>
+        <a href="hospital.html"><span class="nav-ico">🏥</span>医院端</a>
+        <a href="admin-dashboard.html"><span class="nav-ico">🛠️</span>管理端</a>
+        <a href="index.html"><span class="nav-ico">🏠</span>返回首页</a>
+      </nav>
+      <div class="sidebar-footer">积分：你的成长轨迹</div>
+    </aside>
+
+    <div class="app-main">
+      <header class="topbar">
+        <div class="flex gap-2" style="align-items:center;">
+          <button class="menu-toggle">☰</button>
+          <div class="topbar-title">💬 学生端 · 诊断练习</div>
+        </div>
+        <div class="topbar-actions flex gap-2 flex-center wrap">
+          <span class="badge badge-primary">👤 <span id="studentName">医学生</span></span>
+          <span class="badge badge-warning">🪙 <span id="pointsTotal">0</span> 积分</span>
+          <button class="btn btn-ghost btn-sm" id="btnSetName">设置昵称</button>
+        </div>
+      </header>
+
+      <div class="content-scroll">
+        <div class="content-wrap" style="height:calc(100vh - var(--topbar-height) - 48px);">
+          <div class="split-layout" style="height:100%;">
+            <!-- 左侧：病例选择 -->
+            <div class="split-side">
+              <div class="split-side-head flex-between">
+                <span>选择病例</span>
+                <select class="select" id="caseTypeFilter" style="width:auto;padding:4px 8px;"></select>
+              </div>
+              <div class="split-side-body" id="caseList"></div>
+            </div>
+
+            <!-- 右侧：聊天诊断 -->
+            <div class="split-main" id="chatPanel">
+              <div class="split-side-head flex-between flex-wrap gap-2">
+                <div>
+                  <b id="chatTitle">未开始诊断</b>
+                  <div id="chatBadges" class="flex gap-2 mt-3 wrap"></div>
+                </div>
+                <div class="flex gap-2">
+                  <button class="btn btn-sm btn-ghost" id="btnRestart">重新开始</button>
+                  <button class="btn btn-sm btn-danger" id="btnEnd">结束诊断</button>
+                </div>
+              </div>
+              <div id="demoBanner" class="banner banner-info" style="display:none;margin:12px 16px 0;"></div>
+              <div class="chat-body" id="chatBody"></div>
+              <div class="chat-input-bar">
+                <div class="chat-input-row">
+                  <textarea id="chatInput" placeholder="输入你的问诊内容，回车发送（Shift+Enter 换行）…"></textarea>
+                  <button class="btn btn-primary btn-icon" id="btnSend" title="发送">➤</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/mock-ai.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/points.js"></script>
+  <script src="js/student-diagnosis.js"></script>
+  <script src="js/shell.js"></script>
+</body>
+</html>
